@@ -4,16 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrismLearnProject.Views"
+        xmlns:p="http://prismlibrary.com/"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         WindowStyle="None"
         AllowsTransparency="True"
         mc:Ignorable="d"
-        Opacity="0.5"
+        Opacity="1"
         Background="SkyBlue"
         Title="{Binding TitleStr}" Height="450" Width="800"
-        MouseDown="Window_MouseDown"
-        MouseUp="Window_MouseUp"
-        MouseMove="Window_MouseMove"
+        x:Name="win"
         >
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseDown">
+            <p:InvokeCommandAction Command="{Binding Window_MouseDown}"
+                                   CommandParameter="{Binding ElementName=win}"
+                                   ></p:InvokeCommandAction>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="MouseUp">
+            <i:InvokeCommandAction Command="{Binding Window_MouseUp}"
+                                   PassEventArgsToCommand="True"
+                                   ></i:InvokeCommandAction>
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="MouseMove">
+            <p:InvokeCommandAction Command="{Binding Window_MouseMove}"
+                                   CommandParameter="{Binding ElementName=win}"
+                                   ></p:InvokeCommandAction>
+        </i:EventTrigger>
+
+
+    </i:Interaction.Triggers>
+
+    
+    
     <StackPanel>
         <TextBlock FontSize="50" Foreground="Red" Text="MainWindow"></TextBlock>
         <Button Width="100" Height=" 40" Command="{Binding ShowTitleCommand}">发布事件总线</Button>

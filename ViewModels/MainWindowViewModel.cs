@@ -21,6 +21,10 @@ namespace PrismLearnProject.ViewModels
         public DelegateCommand<string> OpenDialogView { get; set; } 
         public DelegateCommand<string> OpenWindowCommand { get; set; }
 
+        public DelegateCommand<Window> Window_MouseDown {  get; set; }
+        public DelegateCommand<MouseButtonEventArgs> Window_MouseUp {  get; set; }
+        public DelegateCommand<Window> Window_MouseMove {  get; set; }
+
         public bool IsEnableMove { get; set; }
         
 
@@ -33,6 +37,10 @@ namespace PrismLearnProject.ViewModels
             ShowTitleCommand=new DelegateCommand(ShowTitle);
             OpenWindowCommand = new DelegateCommand<string>(OpenWindow);
             OpenDialogView = new DelegateCommand<string>(OpenDialog);
+
+            Window_MouseDown = new DelegateCommand<Window>(MouseDown);
+            Window_MouseUp = new DelegateCommand<MouseButtonEventArgs>(MouseUp);
+            Window_MouseMove = new DelegateCommand<Window>(MouseMove);
             
             container = _container;
             eventAggregator = _eventAggregator;
@@ -68,6 +76,37 @@ namespace PrismLearnProject.ViewModels
             });
          }
 
-        
+        public bool IsEnable { get; set; }
+
+        public Point PreMousePoint { get; set; }
+
+
+        private void MouseDown( Window win)
+        {
+            PreMousePoint = Mouse.GetPosition(null);
+            IsEnable = true;
+            Mouse.Capture(win);
+
+        }
+
+        private void MouseUp( MouseButtonEventArgs e)
+        {
+            IsEnable = false;
+            Mouse.Capture(null);
+        }
+
+        private void MouseMove( Window win)
+        {
+            if (IsEnable)
+            {
+                Point point = Mouse.GetPosition(null);
+
+                win.Left += point.X - PreMousePoint.X;
+                win.Top += point.Y - PreMousePoint.Y;
+            }
+
+        }
+
+
     }
 }
