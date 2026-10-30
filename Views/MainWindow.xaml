@@ -1,0 +1,25 @@
+﻿<Window x:Class="PrismLearnProject.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrismLearnProject.Views"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        mc:Ignorable="d"
+        Opacity="0.5"
+        Background="SkyBlue"
+        Title="{Binding TitleStr}" Height="450" Width="800"
+        MouseDown="Window_MouseDown"
+        MouseUp="Window_MouseUp"
+        MouseMove="Window_MouseMove"
+        >
+    <StackPanel>
+        <TextBlock FontSize="50" Foreground="Red" Text="MainWindow"></TextBlock>
+        <Button Width="100" Height=" 40" Command="{Binding ShowTitleCommand}">发布事件总线</Button>
+        <Button Margin="0,10" Width="100" Height=" 40" Command="{Binding OpenWindowCommand}" CommandParameter="ViewA">打开A</Button>
+        <Button Width="100" Height=" 40" Command="{Binding OpenWindowCommand}" CommandParameter="ViewB">打开B</Button>
+        <Button Margin="0,10" Width="100" Height=" 40" Command="{Binding OpenDialogView}" CommandParameter="DialogViewA">打开弹窗A</Button>
+        <Button Margin="0,10" Width="100" Height=" 40" Command="{Binding OpenDialogView}" CommandParameter="DialogViewB">打开弹窗B</Button>
+    </StackPanel>
+</Window>
