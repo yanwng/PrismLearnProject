@@ -1,4 +1,6 @@
-﻿using Prism.Events;
+﻿using Prism.Commands;
+using Prism.Events;
+using Prism.Mvvm;
 using PrismLearnProject.HelpClass;
 using System;
 using System.Collections.Generic;
@@ -8,12 +10,18 @@ using System.Windows;
 namespace PrismLearnProject.ViewModels
 {
     
-    public class ViewAViewModel
+    public class ViewAViewModel:BindableBase
     {
         public string TitleStr { get; set; } = "我是ViewA";
 
-        public ViewAViewModel( IEventAggregator eventAggregator)
+        public int Count { get; set { SetProperty(ref field, value); } }
+
+        public DelegateCommand IncreateCount { get; set; }
+        public ViewAViewModel( IEventAggregator eventAggregator,CompositeCommand composite)
         {
+            IncreateCount = new DelegateCommand(() => { Count++; });
+            composite.RegisterCommand( IncreateCount);
+            
             eventAggregator.GetEvent<EventMessageArgs>().Subscribe(ShowTitle);
         }
 

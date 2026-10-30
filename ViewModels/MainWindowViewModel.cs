@@ -25,6 +25,8 @@ namespace PrismLearnProject.ViewModels
         public DelegateCommand<MouseButtonEventArgs> Window_MouseUp {  get; set; }
         public DelegateCommand<Window> Window_MouseMove {  get; set; }
 
+        public CompositeCommand AllIncrease {  get; set; }
+
         public bool IsEnableMove { get; set; }
         
 
@@ -32,7 +34,7 @@ namespace PrismLearnProject.ViewModels
         IContainerProvider container;
         DialogService dialogService;
 
-        public MainWindowViewModel(IEventAggregator _eventAggregator,IContainerProvider _container,DialogService _dialogService) 
+        public MainWindowViewModel(IEventAggregator _eventAggregator,IContainerProvider _container,DialogService _dialogService,CompositeCommand _composite) 
         {
             ShowTitleCommand=new DelegateCommand(ShowTitle);
             OpenWindowCommand = new DelegateCommand<string>(OpenWindow);
@@ -41,6 +43,9 @@ namespace PrismLearnProject.ViewModels
             Window_MouseDown = new DelegateCommand<Window>(MouseDown);
             Window_MouseUp = new DelegateCommand<MouseButtonEventArgs>(MouseUp);
             Window_MouseMove = new DelegateCommand<Window>(MouseMove);
+
+
+            AllIncrease = _composite;
             
             container = _container;
             eventAggregator = _eventAggregator;

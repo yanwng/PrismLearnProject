@@ -1,4 +1,5 @@
-﻿using Prism.Ioc;
+﻿using Prism.Commands;
+using Prism.Ioc;
 using Prism.Unity;
 using PrismLearnProject.ViewModels;
 using PrismLearnProject.Views;
@@ -28,6 +29,9 @@ namespace PrismLearnProject
             containerRegistry.RegisterDialog<DialogViewA>();
             containerRegistry.RegisterDialog<DialogViewB>();
             containerRegistry.RegisterDialogWindow<DialogParent>();
+
+            //注册一个复合命令
+            containerRegistry.RegisterSingleton<CompositeCommand>();
         }
     }
 

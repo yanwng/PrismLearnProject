@@ -1,5 +1,10 @@
-﻿using System;
+﻿using Prism.Commands;
+using Prism.Ioc;
+using PrismLearnProject.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,9 +22,17 @@ namespace PrismLearnProject.Views
     /// </summary>
     public partial class ViewA : Window
     {
+        
+       public CompositeCommand composite;
         public ViewA()
         {
             InitializeComponent();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+           ViewAViewModel model = (ViewAViewModel)DataContext;
+            ContainerLocator.Container.Resolve<CompositeCommand>().UnregisterCommand(model.IncreateCount);
         }
     }
 }

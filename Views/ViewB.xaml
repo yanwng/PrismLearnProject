@@ -8,7 +8,8 @@
         xmlns:p="http://prismlibrary.com/"
         p:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding TitleStr}" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <TextBlock TextAlignment="Center" Text="{Binding Count}" FontSize="50" Foreground="Red"/>
+        <Button Command="{Binding IncreateCount}" Width="120" Height="50" Content="Count++" FontSize="20"/>
+    </StackPanel>
 </Window>
