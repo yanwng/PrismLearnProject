@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Events;
 using Prism.Ioc;
+using Prism.Regions;
 using Prism.Services.Dialogs;
 using PrismLearnProject.HelpClass;
 using PrismLearnProject.Views;
@@ -27,6 +28,8 @@ namespace PrismLearnProject.ViewModels
 
         public CompositeCommand AllIncrease {  get; set; }
 
+        public DelegateCommand OpenMainRegionView { get; set; }
+
         public bool IsEnableMove { get; set; }
         
 
@@ -34,7 +37,8 @@ namespace PrismLearnProject.ViewModels
         IContainerProvider container;
         DialogService dialogService;
 
-        public MainWindowViewModel(IEventAggregator _eventAggregator,IContainerProvider _container,DialogService _dialogService,CompositeCommand _composite) 
+        public MainWindowViewModel(IEventAggregator _eventAggregator,IContainerProvider _container,
+            DialogService _dialogService,CompositeCommand _composite) 
         {
             ShowTitleCommand=new DelegateCommand(ShowTitle);
             OpenWindowCommand = new DelegateCommand<string>(OpenWindow);
@@ -50,9 +54,26 @@ namespace PrismLearnProject.ViewModels
             container = _container;
             eventAggregator = _eventAggregator;
             dialogService= _dialogService;
-          //  eventAggregator.GetEvent<EventMessageArgs>().Subscribe(ShowTitle);
+            //  eventAggregator.GetEvent<EventMessageArgs>().Subscribe(ShowTitle);
+
+            OpenMainRegionView = new DelegateCommand(MainRegion);
 
 
+
+
+        }
+
+        private void MainRegion()
+        {
+
+            MainRegionView mainRegionView = ContainerLocator.Container.Resolve<MainRegionView>();
+
+            mainRegionView.Show();
+            mainRegionView.Activate();
+            
+            mainRegionView.Visibility = Visibility.Visible;
+            
+           
         }
 
         //打开DialogView

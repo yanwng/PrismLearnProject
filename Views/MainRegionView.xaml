@@ -1,0 +1,30 @@
+﻿<Window x:Class="PrismLearnProject.Views.MainRegionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrismLearnProject.Views"
+        xmlns:p="http://prismlibrary.com/"
+        p:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d"
+        Title="MainRegionView" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel MinWidth="100" DockPanel.Dock="Left">
+            <Button Margin="10,10" Command="{Binding ExChanageRegion}" CommandParameter="RegionA,MainRegion">Main区域A</Button>
+            <Button Margin="10,10" Command="{Binding ExChanageRegion}" CommandParameter="RegionB,MainRegion">Main区域B</Button>
+            <Button Margin="10,10" Command="{Binding ExChanageRegion}" CommandParameter="RegionC,MainRegion">Main区域C</Button>
+            
+            <Button Margin="10,10" Command="{Binding ExChanageRegion}" CommandParameter="RegionA,Region">区域A</Button>
+            <Button Margin="10,10" Command="{Binding ExChanageRegion}" CommandParameter="RegionB,Region">区域B</Button>
+            <Button Margin="10,10" Command="{Binding ExChanageRegion}" CommandParameter="RegionC,Region">区域C</Button>
+            
+        </StackPanel>
+        <Grid Width="300">
+            <ContentControl p:RegionManager.RegionName="Region"/>
+        </Grid>
+        <Grid DockPanel.Dock="Right">
+            <ContentControl p:RegionManager.RegionName="MainRegion"/>
+            
+        </Grid>
+    </DockPanel>
+</Window>
